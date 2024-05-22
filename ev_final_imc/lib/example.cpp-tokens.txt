@@ -1,0 +1,260 @@
+preprocessing: #include
+space:  
+library: <iostream>
+newline: 
+
+preprocessing: #include
+space:  
+library: <vector>
+newline: 
+
+preprocessing: #include
+space:  
+library: <string>
+newline: 
+
+newline: 
+
+structure_or_class_instance_declaration: using namespace
+space:  
+reserved_word: std
+special_symbol: ;
+newline: 
+
+newline: 
+
+reserved_word: class
+space:  
+structure_or_class_name: Example
+space:  
+curly_braces: {
+newline: 
+
+reserved_word: public
+special_symbol: :
+newline: 
+
+space:     
+function_name: Example
+parenthesis: (
+parenthesis: )
+space:  
+special_symbol: :
+space:  
+function_name: number
+parenthesis: (
+integer_number: 0
+parenthesis: )
+space:  
+curly_braces: {
+curly_braces: }
+newline: 
+
+newline: 
+
+space:     
+reserved_word: void
+space:  
+function_name: setNumber
+parenthesis: (
+reserved_word: int
+space:  
+variable: num
+parenthesis: )
+space:  
+curly_braces: {
+newline: 
+
+space:         
+variable: number
+space:  
+operator: =
+space:  
+variable: num
+special_symbol: ;
+newline: 
+
+space:     
+curly_braces: }
+newline: 
+
+newline: 
+
+space:     
+reserved_word: int
+space:  
+function_name: getNumber
+parenthesis: (
+parenthesis: )
+space:  
+reserved_word: const
+space:  
+curly_braces: {
+newline: 
+
+space:         
+reserved_word: return
+space:  
+variable: number
+special_symbol: ;
+newline: 
+
+space:     
+curly_braces: }
+newline: 
+
+newline: 
+
+space:     
+reserved_word: void
+space:  
+function_name: displayMessage
+parenthesis: (
+parenthesis: )
+space:  
+reserved_word: const
+space:  
+curly_braces: {
+newline: 
+
+space:         
+reserved_word: cout
+space:  
+operator: <<
+space:  
+string: "The number is: "
+space:  
+operator: <<
+space:  
+variable: number
+space:  
+operator: <<
+space:  
+reserved_word: endl
+special_symbol: ;
+newline: 
+
+space:     
+curly_braces: }
+newline: 
+
+newline: 
+
+reserved_word: private
+special_symbol: :
+newline: 
+
+space:     
+reserved_word: int
+space:  
+variable: number
+special_symbol: ;
+newline: 
+
+curly_braces: }
+special_symbol: ;
+newline: 
+
+newline: 
+
+reserved_word: int
+space:  
+function_name: main
+parenthesis: (
+parenthesis: )
+space:  
+curly_braces: {
+newline: 
+
+space:     
+structure_or_class_instance_declaration: Example example
+special_symbol: ;
+newline: 
+
+space:     
+structure_or_class_instance: example
+operator: .
+function_name: setNumber
+parenthesis: (
+integer_number: 42
+parenthesis: )
+special_symbol: ;
+newline: 
+
+space:     
+structure_or_class_instance: example
+operator: .
+function_name: displayMessage
+parenthesis: (
+parenthesis: )
+special_symbol: ;
+newline: 
+
+newline: 
+
+space:     
+reserved_word: float
+space:  
+variable: number
+space:  
+operator: =
+space:  
+float_number: 34.4
+special_symbol: ;
+newline: 
+
+newline: 
+
+space:     
+comment: // A simple loop
+newline: 
+
+space:     
+reserved_word: for
+space:  
+parenthesis: (
+reserved_word: int
+space:  
+variable: i
+space:  
+operator: =
+space:  
+integer_number: 0
+special_symbol: ;
+space:  
+variable: i
+space:  
+operator: <
+space:  
+integer_number: 10
+special_symbol: ;
+space:  
+operator: ++
+variable: i
+parenthesis: )
+space:  
+curly_braces: {
+newline: 
+
+space:         
+reserved_word: cout
+space:  
+operator: <<
+space:  
+string: "i is: "
+space:  
+operator: <<
+space:  
+variable: i
+space:  
+operator: <<
+space:  
+reserved_word: endl
+special_symbol: ;
+newline: 
+
+space:     
+curly_braces: }
+newline: 
+
+curly_braces: }

@@ -1,0 +1,38 @@
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+class Example {
+public:
+    Example() : number(0) {}
+
+    void setNumber(int num) {
+        number = num;
+    }
+
+    int getNumber() const {
+        return number;
+    }
+
+    void displayMessage() const {
+        cout << "The number is: " << number << endl;
+    }
+
+private:
+    int number;
+};
+
+int main() {
+    Example example;
+    example.setNumber(42);
+    example.displayMessage();
+
+    float number = 34.4;
+
+    // A simple loop
+    for (int i = 0; i < 10; ++i) {
+        cout << "i is: " << i << endl;
+    }
+}
