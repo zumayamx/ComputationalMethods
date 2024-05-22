@@ -32,15 +32,15 @@ defmodule Tfile do
     #|> Enum.map(fn line -> Regex.scan(~r/\w+@\w+\.\w{2,4}/, line) end)
     # Using a named function instead
     |> Enum.map(&find_token(&1))
-    |> IO.inspect(label: "After scan")
+    #|> IO.inspect(label: "After scan")
     # Eliminate lines without an email
     |> Enum.filter(&(&1 != []))
-    |> IO.inspect(label: "After filter")
+    #|> IO.inspect(label: "After filter")
     # Remove the lists containing the emails
     |> List.flatten()
     #|> Enum.map(&hd/1)
     #|> Enum.map(&hd/1)
-    |> IO.inspect(label: "After getting the heads of the lists")
+    #|> IO.inspect(label: "After getting the heads of the lists")
     # Write each line to the file
     |> doHtml(out_fd)
     File.close(out_fd)
@@ -83,7 +83,7 @@ defp find_token(line, res) do
     ^register\b|^switch\b|^and\b|^or\b|^namespace\b|^static_cast\b|^goto\b|^not\b|^xor\b|
     ^bool\b|^do\b|^double\b|^int\b|^unsigned\b|^void\b|^virtual\b|^union\b|^while\b|^std\b|^cout\b|^endl\b/}, #error de corte
     {:preprocessing, ~r/^#\w+/},
-    {:library,  ~r/^[<"][\w\.]+[>"]/},
+    {:library,  ~r/^[<][\w\.]+[>]/}, #error de library
     {:newline, ~r/^\n+/},
     {:space, ~r/^\s/},
     {:special_symbol, ~r/^;/},
