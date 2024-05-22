@@ -1,0 +1,69 @@
+body {
+    font-family: monospace;
+    background-color: #2e3440;
+    color: #d8dee9;
+  }
+  
+  .preprocessing {
+    color: #88c0d0; /* Light Cyan */
+  }
+  
+  .library {
+    color: #81a1c1; /* Desaturated Blue */
+  }
+  
+  .structure_or_class_instance_declaration {
+    color: #5e81ac; /* Soft Blue */
+  }
+  
+  .reserved_word {
+    color: #bf616a; /* Soft Red */
+  }
+  
+  .special_symbol {
+    color: #d08770; /* Soft Orange */
+  }
+  
+  .structure_or_class_name {
+    color: #ebcb8b; /* Light Yellow */
+  }
+  
+  .curly_braces {
+    color: #a3be8c; /* Soft Green */
+  }
+  
+  .operator {
+    color: #b48ead; /* Soft Purple */
+  }
+  
+  .function_name {
+    color: #8fbcbb; /* Soft Teal */
+  }
+  
+  .integer_number {
+    color: #d8dee9; /* Default Text Color */
+  }
+  
+  .variable {
+    color: #d8dee9; /* Default Text Color */
+  }
+  
+  .string {
+    color: #a3be8c; /* Soft Green */
+  }
+  
+  .float_number {
+    color: #b48ead; /* Soft Purple */
+  }
+  
+  .comment {
+    color: #616e88; /* Dimmed Blue */
+  }
+  
+  .template_type {
+    color: #ebcb8b; /* Light Yellow */
+  }
+  
+  .structure_or_class_instance {
+    color: #88c0d0; /* Light Cyan */
+  }

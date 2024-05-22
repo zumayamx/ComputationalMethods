@@ -42,12 +42,13 @@ defmodule Tfile do
     #|> Enum.map(&hd/1)
     |> IO.inspect(label: "After getting the heads of the lists")
     # Write each line to the file
-    |> Enum.map(fn {tag, word} ->
-      IO.puts(out_fd, "#{tag}: #{word}")
-    end)
-
+    |> doHtml(out_fd)
     File.close(out_fd)
   end
+
+  # Enum.map(fn {tag, word} ->
+  #   IO.puts(out_fd, "#{tag}: #{word}")
+  # end)
 
   @doc """
   Function to look for an email address inside a string
@@ -68,7 +69,7 @@ defmodule Tfile do
   #   find_token(line, [matches | res])
   # end
 
-@spec find_token(String.t()) :: list()
+@spec find_token(String.t()) :: list() #que es el spect
 def find_token(line), do: find_token(line, [])
 
 defp find_token("", res), do: Enum.reverse(res)
@@ -80,12 +81,12 @@ defp find_token(line, res) do
     ^long\b|^new\b|^operator\b|^private\b|^protected\b|^public\b|^return\b|^short\b|
     ^sizeof\b|^static\b|^this\b|^typedef\b|^enum\b|^throw\b|^mutable\b|^struct\b|^case\b|
     ^register\b|^switch\b|^and\b|^or\b|^namespace\b|^static_cast\b|^goto\b|^not\b|^xor\b|
-    ^bool\b|^do\b|^double\b|^int\b|^unsigned\b|^void\b|^virtual\b|^union\b|^while\b|^std\b|^cout\b|^endl\b/},
+    ^bool\b|^do\b|^double\b|^int\b|^unsigned\b|^void\b|^virtual\b|^union\b|^while\b|^std\b|^cout\b|^endl\b/}, #error de corte
     {:preprocessing, ~r/^#\w+/},
     {:library,  ~r/^[<"][\w\.]+[>"]/},
     {:newline, ~r/^\n+/},
-    {:space, ~r/^\s+/},
-    {:special_symbol, ~r/^;|^:/},
+    {:space, ~r/^\s/},
+    {:special_symbol, ~r/^;/},
     {:structure_or_class_name, ~r/^\w+(?=\s*\{)/},
     {:structure_or_class_instance_declaration, ~r/^\w+\s+\w+/},
     {:structure_or_class_instance, ~r/^(?!\d)\w+(?=\.)/},
@@ -94,9 +95,10 @@ defp find_token(line, res) do
     {:function_name, ~r/^\w+(?=\s*\()/},
     {:integer_number, ~r/^[-+]?\d+\b(?!\.)/},
     {:float_number, ~r/^[+-]?\d*\.\d+/},
-    {:operator, ~r/^\+(?!\+)|^\-(?!\-)|^\=(?!\=)|^\:(?!\:)|^\:\:|^\<(?!\<)|^\>(?!\>)|^\<\<|^\>\>|^\.|^\+\+|^\-\-|^\=\=/}, #checar si esto es valido, ver si pasando primero new line esta correcto
-    {:string, ~r/".*"/},
+    {:operator, ~r/^\+(?!\+)|^\-(?!\-)|^\=(?!\=)|^\:(?!\:)|^\:\:|^\<(?!\<)|^\>(?!\>)|^\&(?!\&)|^\<\<|^\>\>|^\.|^\+\+|^\-\-|^\=\=|^\&\&|^\,/}, #checar si esto es valido, ver si pasando primero new line esta correcto, mult,div,per
+    {:string, ~r/^".*"/},
     {:comment, ~r/^\/\/.*|\/\*[\s\S]*?\*\//},
+    {:template_type, ~r/^\w+<\w+>/}, #cambiar a espacios
     {:variable, ~r/^\w+/}
   ]
 
@@ -107,6 +109,7 @@ defp find_token(line, res) do
         [match] ->
           IO.inspect(String.length(match), label: 'longitud')
           IO.inspect(match, label: 'match')
+          IO.inspect(type, label: 'Tipo')
           remaining = String.slice(line, String.length(match)..String.length(line))
           IO.inspect(remaining, label: 'Sobrante')
           {type, match, remaining}
@@ -118,6 +121,70 @@ defp find_token(line, res) do
   find_token(remaining_line, [{token_type, token} | res])
 end
 
+def doHtml(list, out_fd) do
+  IO.puts(out_fd, """
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="styles.css">
+      <title>Document</title>
+  </head>
+  <body>
+  <pre><code>
+  """)
+
+  html_content =
+    Enum.map(list, fn {class, word} ->
+      word = to_string(word)
+      escaped_word = String.replace(word, "<", "&lt;")
+                      |> String.replace(">", "&gt;")
+
+      cond do
+        class == :space -> " "
+        class == :newline -> "\n"
+        class == :library -> "<span class=\"#{class}\">#{escaped_word}</span>"
+        true ->  "<span class=\"#{class}\">#{escaped_word}</span>"
+      end
+    end)
+    |> Enum.join("")
+
+  IO.puts(out_fd, html_content)
+
+  IO.puts(out_fd, """
+  </code></pre>
+  </body>
+  </html>
+  """)
+end
+# def doHtml(list, out_fd) do
+#   IO.puts(out_fd, '<!DOCTYPE html>
+#   <html lang="en">
+#   <head>
+#       <meta charset="UTF-8">
+#       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+#       <link rel="stylesheet" href="styles.css">
+#       <title>Document</title>
+#   </head>
+#   <body>')
+
+#   Enum.map(list, fn {class, word} ->
+#     cond do
+#       class == :space -> IO.puts(out_fd, " ")
+#       class == :newline -> IO.puts(out_fd, "\n")
+#       true ->  IO.puts(out_fd, '<span class="#{class}">#{word}</span>')
+#    end
+#  end)
+
+# #  Enum.map(list, fn {class, word} ->
+# #   IO.puts(out_fd, '<span class="#{class}">#{word}</span>')
+# #  end)
+
+#   IO.puts(out_fd, '</body>
+#   </html>')
+# end
+
 end
 
 # IO.inspect(line, label: "Processing line")
@@ -127,7 +194,7 @@ end
 [in_filename] = System.argv()
 # Create the name of the output file
 # Add the string "-emails" before the file extension
-out_filename = String.replace(in_filename, ~r/(\.\w+$)/, "-tokens\\1")
+out_filename = String.replace(in_filename, ~r/(\.\w+$)/, "-tokens.html")
 # Call the function to find emails
 Tfile.get_emails(in_filename, out_filename)
 
