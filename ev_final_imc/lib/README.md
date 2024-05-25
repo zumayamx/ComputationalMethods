@@ -18,7 +18,7 @@ como palabras reservadas, directivas de preprocesamiento, referencias de bibliot
    - Ejecuta el siguiente comando, reemplazando `example.cpp` con el nombre de tu archivo C++:
 
      ```sh
-     elixir 07_file_io.exs example.cpp.txt
+     elixir 07_file_io.exs example.cpp
      ```
 
 4. **Resultado**:
