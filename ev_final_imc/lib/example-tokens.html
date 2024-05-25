@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Document</title>
+</head>
+<body>
+<pre><code>
+
+<span class="preprocessing">#include</span> <span class="library">&lt;iostream&gt;</span>
+<span class="preprocessing">#include</span> <span class="library">&lt;vector&gt;</span>
+<span class="preprocessing">#include</span> <span class="library">&lt;string&gt;</span>
+
+<span class="reserved_word">using</span> <span class="reserved_word">namespace</span> <span class="variable">std</span><span class="special_symbol">;</span>
+
+<span class="reserved_word">class</span> <span class="structure_or_class_name">Example</span> <span class="curly_braces">{</span>
+<span class="reserved_word">public</span><span class="operator">:</span>
+    <span class="function_name">Example</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="operator">:</span> <span class="function_name">number</span><span class="parenthesis">(</span><span class="integer_number">0</span><span class="parenthesis">)</span> <span class="curly_braces">{</span><span class="curly_braces">}</span>
+
+    <span class="reserved_word">void</span> <span class="function_name">setNumber</span><span class="parenthesis">(</span><span class="reserved_word">int</span> <span class="variable">num</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+        <span class="variable">number</span> <span class="operator">=</span> <span class="variable">num</span><span class="special_symbol">;</span>
+    <span class="curly_braces">}</span>
+
+    <span class="reserved_word">int</span> <span class="function_name">getNumber</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="reserved_word">const</span> <span class="curly_braces">{</span>
+        <span class="reserved_word">return</span> <span class="variable">number</span><span class="special_symbol">;</span>
+    <span class="curly_braces">}</span>
+
+    <span class="reserved_word">void</span> <span class="function_name">displayMessage</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="reserved_word">const</span> <span class="curly_braces">{</span>
+        <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"The number is: "</span> <span class="operator">&lt;&lt;</span> <span class="variable">number</span> <span class="operator">&lt;&lt;</span> <span class="reserved_word">endl</span><span class="special_symbol">;</span>
+    <span class="curly_braces">}</span>
+
+<span class="reserved_word">private</span><span class="operator">:</span>
+    <span class="reserved_word">int</span> <span class="variable">number</span><span class="special_symbol">;</span>
+<span class="curly_braces">}</span><span class="special_symbol">;</span>
+
+<span class="reserved_word">int</span> <span class="function_name">main</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+    <span class="structure_or_class_instance_declaration">Example</span> <span class="variable">example</span><span class="special_symbol">;</span>
+    <span class="variable">example</span><span class="operator">.</span><span class="function_name">setNumber</span><span class="parenthesis">(</span><span class="integer_number">42</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+    <span class="variable">example</span><span class="operator">.</span><span class="function_name">displayMessage</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+
+    <span class="reserved_word">float</span> <span class="variable">number</span> <span class="operator">=</span> <span class="float_number">34.4</span><span class="special_symbol">;</span>
+
+    <span class="comment">// A simple loop</span>
+    <span class="reserved_word">for</span> <span class="parenthesis">(</span><span class="reserved_word">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="integer_number">0</span><span class="special_symbol">;</span> <span class="variable">i</span> <span class="operator">&lt;</span> <span class="integer_number">10</span><span class="special_symbol">;</span> <span class="operator">++</span><span class="variable">i</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+        <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"i is: "</span> <span class="operator">&lt;&lt;</span> <span class="variable">i</span> <span class="operator">&lt;&lt;</span> <span class="reserved_word">endl</span><span class="special_symbol">;</span>
+    <span class="curly_braces">}</span>
+
+    <span class="comment">// Vector usage</span>
+    <span class="variable">vector</span><span class="library">&lt;string&gt;</span> <span class="variable">words</span> <span class="operator">=</span> <span class="curly_braces">{</span><span class="string">"Hello", "world", "C++", "lexer"</span><span class="curly_braces">}</span><span class="special_symbol">;</span>
+    <span class="reserved_word">for</span> <span class="parenthesis">(</span><span class="reserved_word">const</span> <span class="reserved_word">auto</span><span class="operator">&</span> <span class="variable">word</span> <span class="operator">:</span> <span class="variable">words</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+        <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="variable">word</span> <span class="operator">&lt;&lt;</span> <span class="string">" "</span><span class="special_symbol">;</span>
+    <span class="curly_braces">}</span>
+
+    <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="reserved_word">endl</span><span class="special_symbol">;</span>
+
+    <span class="comment">// Conditional statement</span>
+    <span class="reserved_word">if</span> <span class="parenthesis">(</span><span class="variable">example</span><span class="operator">.</span><span class="function_name">getNumber</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="operator">&gt;</span> <span class="integer_number">0</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+        <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"Number is positive"</span> <span class="operator">&lt;&lt;</span> <span class="reserved_word">endl</span><span class="special_symbol">;</span>
+    <span class="curly_braces">}</span> <span class="reserved_word">else</span> <span class="curly_braces">{</span>
+        <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"Number is non-positive"</span> <span class="operator">&lt;&lt;</span> <span class="reserved_word">endl</span><span class="special_symbol">;</span>
+    <span class="curly_braces">}</span>
+
+    <span class="reserved_word">return</span> <span class="integer_number">0</span><span class="special_symbol">;</span>
+<span class="curly_braces">}</span>
+</code></pre>
+</body>
+</html>
+

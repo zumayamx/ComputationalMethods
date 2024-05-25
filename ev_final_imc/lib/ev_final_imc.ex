@@ -63,7 +63,7 @@ defp find_token(line, res) do
     {:function_name, ~r/^\w+(?=\s*\()/},
     {:integer_number, ~r/^[-+]?\d+\b(?!\.)/},
     {:float_number, ~r/^[+-]?\d*\.\d+/},
-    {:operator, ~r/^\+(?!\+)|^\-(?!\-)|^\=(?!\=)|^\:(?!\:)|^\:\:|^\<(?!\<)|^\>(?!\>)|^\&(?!\&)|^\<\<|^\>\>|^\.|^\+\+|^\-\-|^\=\=|^\&\&|^\,/},
+    {:operator, ~r/^\+(?!\+)|^\-(?!\-)|^\=(?!\=)|^\:(?!\:)|^\:\:|^\<(?!\<)|^\>(?!\>)|^\&(?!\&)|^\<\<|^\>\>|^\.|^\+\+|^\-\-|^\=\=|^\&\&|^\,|^\[|^\]/},
     {:string, ~r/^".*"/},
     {:comment, ~r/^\/\/.*|\/\*[\s\S]*?\*\//},
     {:variable, ~r/^\w+/}
@@ -77,7 +77,10 @@ defp find_token(line, res) do
         case Regex.run(pattern, line, capture: :first) do
           # If a match is found, extract the matched token and the remaining line
           [match] ->
+            IO.inspect(match, label: "Match")
+            IO.inspect(type, label: "Type")
             remaining = String.slice(line, String.length(match)..String.length(line))
+            #IO.inspect()
             {type, match, remaining}
           # If no match is found, return false to continue checking other patterns
           nil -> false
@@ -150,4 +153,4 @@ out_filename = String.replace(in_filename, ~r/(\.\w+$)/, "-tokens.html")
 Tfile.get_tokens(in_filename, out_filename)
 
 # Now the program can be called as:
-# elixir 07_file_io.exs example.cpp.txt
+# elixir ev_final_imc.ex example.cpp
