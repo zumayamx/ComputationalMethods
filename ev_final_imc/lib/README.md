@@ -107,3 +107,24 @@ Asumiendo que cada línea tiene un número promedio de tokens constante, el núm
 - **Si m ≈ n y l es constante, la complejidad se puede simplificar a O(n * p * k^2).**
 
 Por lo tanto, la complejidad total del programa es O(n * p * k^2), donde n es el número de líneas en el archivo, p es el número de patrones, y k es la longitud promedio de las líneas.
+
+# Reflexión sobre Expresiones Regulares y Algoritmos en el Programa Lexer
+
+## Expresiones Regulares
+Considero que las expresiones regulares son una herramienta muy poderosa, en este programa, se utilizan para definir patrones que corresponden a diferentes tipos de tokens en el código C++.
+Además, estas tienen aplicaciones prácticas en la vida cotidiana. Su capacidad para identificar, manipular y transformar texto de manera eficiente las convierte en una herramienta indispensable para los programadores, desde la edición de documentos hasta la gestión de correos electrónicos y la validación de formatos.
+
+La familiaridad con las expresiones regulares y su uso en aplicaciones cotidianas no solo mejoran la eficiencia en la realización de tareas, sino que también aportan ayuda en simplificación de procesos. 
+
+### Proceso Recursivo
+1. **Base Case**: Si la línea está vacía, se retorna la lista acumulada de tokens.
+2. **Recursive Case**: 
+   - Se define una lista de patrones.
+   - Se encuentra el primer patrón que coincide con el inicio de la línea.
+   - Se extrae el token correspondiente y el resto de la línea.
+   - Se llama recursivamente a la función con el resto de la línea y la lista actualizada de tokens.
+
+## Reflexión Final
+El uso de expresiones regulares y algoritmos recursivos en este lexer para C++ demuestra la eficacia de estas técnicas para el análisis. Las expresiones regulares permiten definir patrones complejos de manera concisa, mientras que el algoritmo recursivo asegura un procesamiento estructurado y eficiente del texto. Por otro lado, la generación de HTML como salida proporciona una herramienta útil para visualizar y comprender la estructura del código fuente.
+
+En resumen, este programa ejemplifica cómo las expresiones regulares y los algoritmos recursivos pueden combinarse para crear herramientas poderosas y eficientes para el análisis y procesamiento de texto en el contexto de la programación y el desarrollo de software.
