@@ -127,4 +127,4 @@ La familiaridad con las expresiones regulares y su uso en aplicaciones cotidiana
 ## Reflexión Final
 El uso de expresiones regulares y algoritmos recursivos en este lexer para C++ demuestra la eficacia de estas técnicas para el análisis. Las expresiones regulares permiten definir patrones complejos de manera concisa, mientras que el algoritmo recursivo asegura un procesamiento estructurado y eficiente del texto. Por otro lado, la generación de HTML como salida proporciona una herramienta útil para visualizar y comprender la estructura del código fuente.
 
-En resumen, este programa ejemplifica cómo las expresiones regulares y los algoritmos recursivos pueden combinarse para crear herramientas poderosas y eficientes para el análisis y procesamiento de texto en el contexto de la programación y el desarrollo de software.
+En resumen, este programa ejemplifica cómo las expresiones regulares y los algoritmos recursivos pueden combinarse para crear sistemas eficientes para el análisis y procesamiento de texto en el contexto del desarrollo de software.
