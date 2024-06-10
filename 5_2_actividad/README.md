@@ -1,11 +1,6 @@
 
 # Comparación de Ejecución: Programa Secuencial vs Paralelo
 
-## Descripción
-Detalle de la comparación de tiempos de ejecución entre la versión secuencial y 
-la versión paralelo de un programa que calcula la suma de números primos hasta un número especificado. 
-También se incluye el cálculo del speedup obtenido al utilizar múltiples procesadores.
-
 ## Ejecución de los Programas
 ### Programa secuencial
 Para ejecutar la versión secuencial del programa, use el siguiente comando:
@@ -19,7 +14,7 @@ Para ejecutar la versión paralelo del programa, use el siguiente comando:
 ```
 ./sumPrimeAsync [número de hilos] [número]
 ```
-donde `[número de hilos]` es la cantidad de hilos a utilizar y `[número]` es el valor hasta el cual se desea calcular la suma de los números primos.
+donde `[número de hilos]` es la cantidad de hilos a lanzar y `[número]` es el valor hasta el cual se desea calcular la suma de los números primos.
 
 ## Tiempos de ejecución usando time y una muestra de las ejecuciones
 ### Programa secuencial
@@ -30,7 +25,6 @@ FINAL VALUE: 4852635144983
 ```
 - **Tiempo total (total)**: 4.577 segundos
 - **Tiempo de CPU en modo usuario (user)**: 4.57 segundos
-- **Uso de CPU (cpu)**: 99%
 
 ### Programa paralelo
 ```
@@ -40,22 +34,22 @@ FINAL VALUE: 4852635144983 (Expected 49557868)
 ```
 - **Tiempo total (total)**: 1.623 segundos
 - **Tiempo de CPU en modo usuario (user)**: 4.90 segundos
-- **Uso de CPU (cpu)**: 302%
 
 ## Cálculo del Speedup
-El speedup (\(S_p\)) se calcula usando la siguiente fórmula:
 
-\[ S_p = \frac{T_1}{T_p} \]
+El speedup ($S_p$) se calcula usando la siguiente fórmula:
+
+$$
+S_p = \frac{T_1}{T_p} = \frac{4.577}{1.623}
+$$
 
 donde:
-- \( T_1 \) es el tiempo de ejecución de la versión secuencial.
-- \( T_p \) es el tiempo de ejecución de la versión paralela con \( p \) procesadores en mi caso 4.
+- $T_1$ es el tiempo de ejecución de la versión secuencial.
+- $T_p$ es el tiempo de ejecución de la versión paralela con $p$ procesadores (en mi caso 4).
 
 ### Cálculo:
-\[
+$$
 S_p = \frac{4.577}{1.623} \approx 2.82
-\]
+$$
 
-El speedup obtenido usando 4 procesadores es aproximadamente 2.82, indicando que la versión paralela es 2.82 veces más rápida que la versión secuencial.
-
-
+El speedup obtenido usando 4 procesadores es aproximadamente 2.82, indicando que la versión paralela es **2.82** veces más rápida que la versión secuencial en **una** muestra.
