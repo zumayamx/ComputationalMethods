@@ -19,7 +19,7 @@ defmodule Tfile do
   def get_tokens(in_filename, out_filename) do
 
     # Prepare the file to write the results
-    {:ok, out_fd} = File.open(out_filename, [:write])
+    {:ok, out_fd} = File.open(out_filename, [:write, :utf8])
     # Start with the filename
     in_filename
     # Open the file to read it line by line
@@ -63,7 +63,7 @@ defp find_token(line, res) do
     {:function_name, ~r/^\w+(?=\s*\()/},
     {:integer_number, ~r/^[-+]?\d+\b(?!\.)/},
     {:float_number, ~r/^[+-]?\d*\.\d+/},
-    {:operator, ~r/^\+(?!\+)|^\-(?!\-)|^\=(?!\=)|^\:(?!\:)|^\:\:|^\<(?!\<)|^\>(?!\>)|^\&(?!\&)|^\<\<|^\>\>|^\.|^\+\+|^\-\-|^\=\=|^\&\&|^\,|^\[|^\]|^\!\=/},
+    {:operator, ~r/^\+(?!\+)|^\-(?!\-)|^\=(?!\=)|^\:(?!\:)|^\:\:|^\<(?!\<)|^\>(?!\>)|^\&(?!\&)|^\<\<|^\>\>|^\.|^\+\+|^\-\-|^\=\=|^\&\&|^\,|^\[|^\]|^\!\=|^\*|^\-\>|^\//},
     {:string, ~r/^".*"/},
     {:comment, ~r/^\/\/.*|\/\*[\s\S]*?\*\//},
     {:variable, ~r/^\w+/}
@@ -114,7 +114,7 @@ def doHtml(list, out_fd) do
 
       # Replace special characters to escape HTML
       escaped_word = String.replace(word, "<", "&lt;")
-                      |> String.replace(">", "&gt;")
+                     |> String.replace(">", "&gt;")
 
       # Generate HTML content based on the element's class
       cond do
@@ -131,10 +131,11 @@ def doHtml(list, out_fd) do
     # Join all elements into a single string
     |> Enum.join("")
 
-  # Print the processed HTML content to the output file
-  IO.puts(out_fd, html_content)
+    IO.inspect(html_content, label: "HTML Content")
+    # Write the processed HTML content to the output file
+    IO.puts(out_fd, html_content)
 
-  # Print the closing HTML tags
+  # Write the closing HTML tags
   IO.puts(out_fd, """
   </code></pre>
   </body>

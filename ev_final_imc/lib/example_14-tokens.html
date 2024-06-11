@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Document</title>
+</head>
+<body>
+<pre><code>
+
+<span class="preprocessing">#include</span> <span class="library">&lt;iostream&gt;</span>
+<span class="preprocessing">#include</span> <span class="library">&lt;vector&gt;</span>
+<span class="preprocessing">#include</span> <span class="library">&lt;string&gt;</span>
+<span class="reserved_word">using</span> <span class="reserved_word">namespace</span> <span class="variable">std</span><span class="special_symbol">;</span>
+
+<span class="reserved_word">class</span> <span class="structure_or_class_name">Student</span> <span class="curly_braces">{</span>
+<span class="reserved_word">public</span><span class="operator">:</span>
+    <span class="function_name">Student</span><span class="parenthesis">(</span><span class="structure_or_class_instance_declaration">string</span> <span class="variable">name</span><span class="operator">,</span> <span class="reserved_word">int</span> <span class="variable">age</span><span class="operator">,</span> <span class="structure_or_class_instance_declaration">string</span> <span class="variable">course</span><span class="parenthesis">)</span> <span class="operator">:</span> <span class="function_name">name</span><span class="parenthesis">(</span><span class="variable">name</span><span class="parenthesis">)</span><span class="operator">,</span> <span class="function_name">age</span><span class="parenthesis">(</span><span class="variable">age</span><span class="parenthesis">)</span><span class="operator">,</span> <span class="function_name">course</span><span class="parenthesis">(</span><span class="variable">course</span><span class="parenthesis">)</span> <span class="curly_braces">{</span><span class="curly_braces">}</span>
+
+    <span class="structure_or_class_instance_declaration">string</span> <span class="function_name">getName</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="reserved_word">const</span> <span class="curly_braces">{</span> <span class="reserved_word">return</span> <span class="variable">name</span><span class="special_symbol">;</span> <span class="curly_braces">}</span>
+    <span class="reserved_word">int</span> <span class="function_name">getAge</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="reserved_word">const</span> <span class="curly_braces">{</span> <span class="reserved_word">return</span> <span class="variable">age</span><span class="special_symbol">;</span> <span class="curly_braces">}</span>
+    <span class="structure_or_class_instance_declaration">string</span> <span class="function_name">getCourse</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="reserved_word">const</span> <span class="curly_braces">{</span> <span class="reserved_word">return</span> <span class="variable">course</span><span class="special_symbol">;</span> <span class="curly_braces">}</span>
+
+    <span class="reserved_word">void</span> <span class="function_name">displayInfo</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="reserved_word">const</span> <span class="curly_braces">{</span>
+        <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"Name: " &lt;&lt; name &lt;&lt; ", Age: " &lt;&lt; age &lt;&lt; ", Course: "</span> <span class="operator">&lt;&lt;</span> <span class="variable">course</span> <span class="operator">&lt;&lt;</span> <span class="reserved_word">endl</span><span class="special_symbol">;</span>
+    <span class="curly_braces">}</span>
+
+<span class="reserved_word">private</span><span class="operator">:</span>
+    <span class="structure_or_class_instance_declaration">string</span> <span class="variable">name</span><span class="special_symbol">;</span>
+    <span class="reserved_word">int</span> <span class="variable">age</span><span class="special_symbol">;</span>
+    <span class="structure_or_class_instance_declaration">string</span> <span class="variable">course</span><span class="special_symbol">;</span>
+<span class="curly_braces">}</span><span class="special_symbol">;</span>
+
+<span class="reserved_word">class</span> <span class="structure_or_class_name">StudentManager</span> <span class="curly_braces">{</span>
+<span class="reserved_word">public</span><span class="operator">:</span>
+    <span class="reserved_word">void</span> <span class="function_name">addStudent</span><span class="parenthesis">(</span><span class="reserved_word">const</span> <span class="variable">Student</span><span class="operator">&</span> <span class="variable">student</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+        <span class="variable">students</span><span class="operator">.</span><span class="function_name">push_back</span><span class="parenthesis">(</span><span class="variable">student</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+    <span class="curly_braces">}</span>
+
+    <span class="reserved_word">void</span> <span class="function_name">removeStudent</span><span class="parenthesis">(</span><span class="reserved_word">const</span> <span class="variable">string</span><span class="operator">&</span> <span class="variable">name</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+        <span class="variable">students</span><span class="operator">.</span><span class="function_name">erase</span><span class="parenthesis">(</span><span class="function_name">remove_if</span><span class="parenthesis">(</span><span class="variable">students</span><span class="operator">.</span><span class="function_name">begin</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="operator">,</span> <span class="variable">students</span><span class="operator">.</span><span class="function_name">end</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="operator">,</span> <span class="operator">[</span><span class="operator">&</span><span class="variable">name</span><span class="operator">]</span><span class="parenthesis">(</span><span class="reserved_word">const</span> <span class="variable">Student</span><span class="operator">&</span> <span class="variable">student</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+            <span class="reserved_word">return</span> <span class="variable">student</span><span class="operator">.</span><span class="function_name">getName</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="operator">==</span> <span class="variable">name</span><span class="special_symbol">;</span>
+        <span class="curly_braces">}</span><span class="parenthesis">)</span><span class="operator">,</span> <span class="variable">students</span><span class="operator">.</span><span class="function_name">end</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+    <span class="curly_braces">}</span>
+
+    <span class="reserved_word">void</span> <span class="function_name">displayAllStudents</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="reserved_word">const</span> <span class="curly_braces">{</span>
+        <span class="reserved_word">for</span> <span class="parenthesis">(</span><span class="reserved_word">const</span> <span class="reserved_word">auto</span><span class="operator">&</span> <span class="variable">student</span> <span class="operator">:</span> <span class="variable">students</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+            <span class="variable">student</span><span class="operator">.</span><span class="function_name">displayInfo</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+        <span class="curly_braces">}</span>
+    <span class="curly_braces">}</span>
+
+    <span class="reserved_word">void</span> <span class="function_name">findStudent</span><span class="parenthesis">(</span><span class="reserved_word">const</span> <span class="variable">string</span><span class="operator">&</span> <span class="variable">name</span><span class="parenthesis">)</span> <span class="reserved_word">const</span> <span class="curly_braces">{</span>
+        <span class="reserved_word">auto</span> <span class="variable">it</span> <span class="operator">=</span> <span class="function_name">find_if</span><span class="parenthesis">(</span><span class="variable">students</span><span class="operator">.</span><span class="function_name">begin</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="operator">,</span> <span class="variable">students</span><span class="operator">.</span><span class="function_name">end</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="operator">,</span> <span class="operator">[</span><span class="operator">&</span><span class="variable">name</span><span class="operator">]</span><span class="parenthesis">(</span><span class="reserved_word">const</span> <span class="variable">Student</span><span class="operator">&</span> <span class="variable">student</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+            <span class="reserved_word">return</span> <span class="variable">student</span><span class="operator">.</span><span class="function_name">getName</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="operator">==</span> <span class="variable">name</span><span class="special_symbol">;</span>
+        <span class="curly_braces">}</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+        <span class="reserved_word">if</span> <span class="parenthesis">(</span><span class="variable">it</span> <span class="operator">!=</span> <span class="variable">students</span><span class="operator">.</span><span class="function_name">end</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+            <span class="variable">it</span><span class="operator">-</span><span class="operator">&gt;</span><span class="function_name">displayInfo</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+        <span class="curly_braces">}</span> <span class="reserved_word">else</span> <span class="curly_braces">{</span>
+            <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"Student not found!"</span> <span class="operator">&lt;&lt;</span> <span class="reserved_word">endl</span><span class="special_symbol">;</span>
+        <span class="curly_braces">}</span>
+    <span class="curly_braces">}</span>
+
+<span class="reserved_word">private</span><span class="operator">:</span>
+    <span class="variable">vector</span><span class="library">&lt;Student&gt;</span> <span class="variable">students</span><span class="special_symbol">;</span>
+<span class="curly_braces">}</span><span class="special_symbol">;</span>
+
+<span class="reserved_word">int</span> <span class="function_name">main</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+    <span class="structure_or_class_instance_declaration">StudentManager</span> <span class="variable">manager</span><span class="special_symbol">;</span>
+    <span class="variable">manager</span><span class="operator">.</span><span class="function_name">addStudent</span><span class="parenthesis">(</span><span class="function_name">Student</span><span class="parenthesis">(</span><span class="string">"Alice", 20, "Computer Science"</span><span class="parenthesis">)</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+    <span class="variable">manager</span><span class="operator">.</span><span class="function_name">addStudent</span><span class="parenthesis">(</span><span class="function_name">Student</span><span class="parenthesis">(</span><span class="string">"Bob", 22, "Mathematics"</span><span class="parenthesis">)</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+    <span class="variable">manager</span><span class="operator">.</span><span class="function_name">addStudent</span><span class="parenthesis">(</span><span class="function_name">Student</span><span class="parenthesis">(</span><span class="string">"Charlie", 19, "Physics"</span><span class="parenthesis">)</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+
+    <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"All students:"</span> <span class="operator">&lt;&lt;</span> <span class="reserved_word">endl</span><span class="special_symbol">;</span>
+    <span class="variable">manager</span><span class="operator">.</span><span class="function_name">displayAllStudents</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+
+    <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"Finding Alice:"</span> <span class="operator">&lt;&lt;</span> <span class="reserved_word">endl</span><span class="special_symbol">;</span>
+    <span class="variable">manager</span><span class="operator">.</span><span class="function_name">findStudent</span><span class="parenthesis">(</span><span class="string">"Alice"</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+
+    <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"Removing Bob:"</span> <span class="operator">&lt;&lt;</span> <span class="reserved_word">endl</span><span class="special_symbol">;</span>
+    <span class="variable">manager</span><span class="operator">.</span><span class="function_name">removeStudent</span><span class="parenthesis">(</span><span class="string">"Bob"</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+
+    <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"All students after removal:"</span> <span class="operator">&lt;&lt;</span> <span class="reserved_word">endl</span><span class="special_symbol">;</span>
+    <span class="variable">manager</span><span class="operator">.</span><span class="function_name">displayAllStudents</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+
+    <span class="reserved_word">return</span> <span class="integer_number">0</span><span class="special_symbol">;</span>
+<span class="curly_braces">}</span>
+</code></pre>
+</body>
+</html>
+

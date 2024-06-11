@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Document</title>
+</head>
+<body>
+<pre><code>
+
+<span class="preprocessing">#include</span> <span class="library">&lt;iostream&gt;</span>
+<span class="reserved_word">using</span> <span class="reserved_word">namespace</span> <span class="variable">std</span><span class="special_symbol">;</span>
+
+<span class="variable">template</span> <span class="operator">&lt;</span><span class="structure_or_class_instance_declaration">typename</span> <span class="variable">T</span><span class="operator">&gt;</span>
+<span class="reserved_word">class</span> <span class="structure_or_class_name">Calculator</span> <span class="curly_braces">{</span>
+<span class="reserved_word">public</span><span class="operator">:</span>
+    <span class="structure_or_class_instance_declaration">T</span> <span class="function_name">add</span><span class="parenthesis">(</span><span class="structure_or_class_instance_declaration">T</span> <span class="variable">a</span><span class="operator">,</span> <span class="structure_or_class_instance_declaration">T</span> <span class="variable">b</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+        <span class="reserved_word">return</span> <span class="variable">a</span> <span class="operator">+</span> <span class="variable">b</span><span class="special_symbol">;</span>
+    <span class="curly_braces">}</span>
+<span class="curly_braces">}</span><span class="special_symbol">;</span>
+
+<span class="reserved_word">int</span> <span class="function_name">main</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+    <span class="variable">Calculator</span><span class="library">&lt;int&gt;</span> <span class="variable">intCalc</span><span class="special_symbol">;</span>
+    <span class="variable">Calculator</span><span class="library">&lt;float&gt;</span> <span class="variable">floatCalc</span><span class="special_symbol">;</span>
+
+    <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="variable">intCalc</span><span class="operator">.</span><span class="function_name">add</span><span class="parenthesis">(</span><span class="integer_number">1</span><span class="operator">,</span> <span class="integer_number">2</span><span class="parenthesis">)</span> <span class="operator">&lt;&lt;</span> <span class="reserved_word">endl</span><span class="special_symbol">;</span>
+    <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="variable">floatCalc</span><span class="operator">.</span><span class="function_name">add</span><span class="parenthesis">(</span><span class="float_number">1.5</span><span class="operator">,</span> <span class="float_number">2.5</span><span class="parenthesis">)</span> <span class="operator">&lt;&lt;</span> <span class="reserved_word">endl</span><span class="special_symbol">;</span>
+
+    <span class="reserved_word">return</span> <span class="integer_number">0</span><span class="special_symbol">;</span>
+<span class="curly_braces">}</span>
+</code></pre>
+</body>
+</html>
+

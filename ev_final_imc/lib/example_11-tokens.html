@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Document</title>
+</head>
+<body>
+<pre><code>
+
+<span class="preprocessing">#include</span> <span class="library">&lt;iostream&gt;</span>
+<span class="preprocessing">#include</span> <span class="library">&lt;thread&gt;</span>
+<span class="reserved_word">using</span> <span class="reserved_word">namespace</span> <span class="variable">std</span><span class="special_symbol">;</span>
+
+<span class="reserved_word">void</span> <span class="function_name">printHello</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+    <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"Hello from thread!"</span> <span class="operator">&lt;&lt;</span> <span class="reserved_word">endl</span><span class="special_symbol">;</span>
+<span class="curly_braces">}</span>
+
+<span class="reserved_word">int</span> <span class="function_name">main</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+    <span class="structure_or_class_instance_declaration">thread</span> <span class="function_name">t</span><span class="parenthesis">(</span><span class="variable">printHello</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+    <span class="variable">t</span><span class="operator">.</span><span class="function_name">join</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+
+    <span class="reserved_word">return</span> <span class="integer_number">0</span><span class="special_symbol">;</span>
+<span class="curly_braces">}</span>
+</code></pre>
+</body>
+</html>
+

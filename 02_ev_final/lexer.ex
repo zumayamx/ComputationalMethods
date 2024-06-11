@@ -115,7 +115,7 @@ def doHtml(list, out_fd) do
 
       # Replace special characters to escape HTML
       escaped_word = String.replace(word, "<", "&lt;")
-                      |> String.replace(">", "&gt;")
+                     |> String.replace(">", "&gt;")
 
       # Generate HTML content based on the element's class
       cond do
@@ -132,9 +132,9 @@ def doHtml(list, out_fd) do
 
     # Join all elements into a single string
     |> Enum.join("")
-    # Print the processed HTML content to the output file
+    # Write the processed HTML content to the output file
     IO.puts(out_fd, html_content)
-    # Print the closing HTML tags
+    # Write the closing HTML tags
     IO.puts(out_fd, """
     </code></pre>
     </body>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Document</title>
+</head>
+<body>
+<pre><code>
+
+<span class="preprocessing">#include</span> <span class="library">&lt;iostream&gt;</span>
+<span class="preprocessing">#include</span> <span class="library">&lt;vector&gt;</span>
+<span class="preprocessing">#include</span> <span class="library">&lt;string&gt;</span>
+<span class="reserved_word">using</span> <span class="reserved_word">namespace</span> <span class="variable">std</span><span class="special_symbol">;</span>
+
+<span class="reserved_word">class</span> <span class="structure_or_class_name">Task</span> <span class="curly_braces">{</span>
+<span class="reserved_word">public</span><span class="operator">:</span>
+    <span class="function_name">Task</span><span class="parenthesis">(</span><span class="structure_or_class_instance_declaration">string</span> <span class="variable">description</span><span class="operator">,</span> <span class="structure_or_class_instance_declaration">string</span> <span class="variable">dueDate</span><span class="parenthesis">)</span> <span class="operator">:</span> <span class="function_name">description</span><span class="parenthesis">(</span><span class="variable">description</span><span class="parenthesis">)</span><span class="operator">,</span> <span class="function_name">dueDate</span><span class="parenthesis">(</span><span class="variable">dueDate</span><span class="parenthesis">)</span><span class="operator">,</span> <span class="function_name">completed</span><span class="parenthesis">(</span><span class="variable">false</span><span class="parenthesis">)</span> <span class="curly_braces">{</span><span class="curly_braces">}</span>
+
+    <span class="structure_or_class_instance_declaration">string</span> <span class="function_name">getDescription</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="reserved_word">const</span> <span class="curly_braces">{</span> <span class="reserved_word">return</span> <span class="variable">description</span><span class="special_symbol">;</span> <span class="curly_braces">}</span>
+    <span class="structure_or_class_instance_declaration">string</span> <span class="function_name">getDueDate</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="reserved_word">const</span> <span class="curly_braces">{</span> <span class="reserved_word">return</span> <span class="variable">dueDate</span><span class="special_symbol">;</span> <span class="curly_braces">}</span>
+    <span class="reserved_word">bool</span> <span class="function_name">isCompleted</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="reserved_word">const</span> <span class="curly_braces">{</span> <span class="reserved_word">return</span> <span class="variable">completed</span><span class="special_symbol">;</span> <span class="curly_braces">}</span>
+
+    <span class="reserved_word">void</span> <span class="function_name">markCompleted</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+        <span class="variable">completed</span> <span class="operator">=</span> <span class="variable">true</span><span class="special_symbol">;</span>
+    <span class="curly_braces">}</span>
+
+    <span class="reserved_word">void</span> <span class="function_name">displayInfo</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="reserved_word">const</span> <span class="curly_braces">{</span>
+        <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"Description: " &lt;&lt; description &lt;&lt; ", Due Date: "</span> <span class="operator">&lt;&lt;</span> <span class="variable">dueDate</span>
+             <span class="operator">&lt;&lt;</span> <span class="string">", Completed: " &lt;&lt; (completed ? "Yes" : "No"</span><span class="parenthesis">)</span> <span class="operator">&lt;&lt;</span> <span class="reserved_word">endl</span><span class="special_symbol">;</span>
+    <span class="curly_braces">}</span>
+
+<span class="reserved_word">private</span><span class="operator">:</span>
+    <span class="structure_or_class_instance_declaration">string</span> <span class="variable">description</span><span class="special_symbol">;</span>
+    <span class="structure_or_class_instance_declaration">string</span> <span class="variable">dueDate</span><span class="special_symbol">;</span>
+    <span class="reserved_word">bool</span> <span class="variable">completed</span><span class="special_symbol">;</span>
+<span class="curly_braces">}</span><span class="special_symbol">;</span>
+
+<span class="reserved_word">class</span> <span class="structure_or_class_name">TaskManager</span> <span class="curly_braces">{</span>
+<span class="reserved_word">public</span><span class="operator">:</span>
+    <span class="reserved_word">void</span> <span class="function_name">addTask</span><span class="parenthesis">(</span><span class="reserved_word">const</span> <span class="variable">Task</span><span class="operator">&</span> <span class="variable">task</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+        <span class="variable">tasks</span><span class="operator">.</span><span class="function_name">push_back</span><span class="parenthesis">(</span><span class="variable">task</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+    <span class="curly_braces">}</span>
+
+    <span class="reserved_word">void</span> <span class="function_name">removeTask</span><span class="parenthesis">(</span><span class="reserved_word">const</span> <span class="variable">string</span><span class="operator">&</span> <span class="variable">description</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+        <span class="variable">tasks</span><span class="operator">.</span><span class="function_name">erase</span><span class="parenthesis">(</span><span class="function_name">remove_if</span><span class="parenthesis">(</span><span class="variable">tasks</span><span class="operator">.</span><span class="function_name">begin</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="operator">,</span> <span class="variable">tasks</span><span class="operator">.</span><span class="function_name">end</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="operator">,</span> <span class="operator">[</span><span class="operator">&</span><span class="variable">description</span><span class="operator">]</span><span class="parenthesis">(</span><span class="reserved_word">const</span> <span class="variable">Task</span><span class="operator">&</span> <span class="variable">task</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+            <span class="reserved_word">return</span> <span class="variable">task</span><span class="operator">.</span><span class="function_name">getDescription</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="operator">==</span> <span class="variable">description</span><span class="special_symbol">;</span>
+        <span class="curly_braces">}</span><span class="parenthesis">)</span><span class="operator">,</span> <span class="variable">tasks</span><span class="operator">.</span><span class="function_name">end</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+    <span class="curly_braces">}</span>
+
+    <span class="reserved_word">void</span> <span class="function_name">displayAllTasks</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="reserved_word">const</span> <span class="curly_braces">{</span>
+        <span class="reserved_word">for</span> <span class="parenthesis">(</span><span class="reserved_word">const</span> <span class="reserved_word">auto</span><span class="operator">&</span> <span class="variable">task</span> <span class="operator">:</span> <span class="variable">tasks</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+            <span class="variable">task</span><span class="operator">.</span><span class="function_name">displayInfo</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+        <span class="curly_braces">}</span>
+    <span class="curly_braces">}</span>
+
+    <span class="reserved_word">void</span> <span class="function_name">markTaskCompleted</span><span class="parenthesis">(</span><span class="reserved_word">const</span> <span class="variable">string</span><span class="operator">&</span> <span class="variable">description</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+        <span class="reserved_word">auto</span> <span class="variable">it</span> <span class="operator">=</span> <span class="function_name">find_if</span><span class="parenthesis">(</span><span class="variable">tasks</span><span class="operator">.</span><span class="function_name">begin</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="operator">,</span> <span class="variable">tasks</span><span class="operator">.</span><span class="function_name">end</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="operator">,</span> <span class="operator">[</span><span class="operator">&</span><span class="variable">description</span><span class="operator">]</span><span class="parenthesis">(</span><span class="reserved_word">const</span> <span class="variable">Task</span><span class="operator">&</span> <span class="variable">task</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+            <span class="reserved_word">return</span> <span class="variable">task</span><span class="operator">.</span><span class="function_name">getDescription</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="operator">==</span> <span class="variable">description</span><span class="special_symbol">;</span>
+        <span class="curly_braces">}</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+        <span class="reserved_word">if</span> <span class="parenthesis">(</span><span class="variable">it</span> <span class="operator">!=</span> <span class="variable">tasks</span><span class="operator">.</span><span class="function_name">end</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+            <span class="variable">it</span><span class="operator">-</span><span class="operator">&gt;</span><span class="function_name">markCompleted</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+        <span class="curly_braces">}</span> <span class="reserved_word">else</span> <span class="curly_braces">{</span>
+            <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"Task not found!"</span> <span class="operator">&lt;&lt;</span> <span class="reserved_word">endl</span><span class="special_symbol">;</span>
+        <span class="curly_braces">}</span>
+    <span class="curly_braces">}</span>
+
+<span class="reserved_word">private</span><span class="operator">:</span>
+    <span class="variable">vector</span><span class="library">&lt;Task&gt;</span> <span class="variable">tasks</span><span class="special_symbol">;</span>
+<span class="curly_braces">}</span><span class="special_symbol">;</span>
+
+<span class="reserved_word">int</span> <span class="function_name">main</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+    <span class="structure_or_class_instance_declaration">TaskManager</span> <span class="variable">manager</span><span class="special_symbol">;</span>
+    <span class="variable">manager</span><span class="operator">.</span><span class="function_name">addTask</span><span class="parenthesis">(</span><span class="function_name">Task</span><span class="parenthesis">(</span><span class="string">"Finish the report", "2024-06-30"</span><span class="parenthesis">)</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+    <span class="variable">manager</span><span class="operator">.</span><span class="function_name">addTask</span><span class="parenthesis">(</span><span class="function_name">Task</span><span class="parenthesis">(</span><span class="string">"Prepare presentation", "2024-06-15"</span><span class="parenthesis">)</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+    <span class="variable">manager</span><span class="operator">.</span><span class="function_name">addTask</span><span class="parenthesis">(</span><span class="function_name">Task</span><span class="parenthesis">(</span><span class="string">"Buy groceries", "2024-06-10"</span><span class="parenthesis">)</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+
+    <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"All tasks:"</span> <span class="operator">&lt;&lt;</span> <span class="reserved_word">endl</span><span class="special_symbol">;</span>
+    <span class="variable">manager</span><span class="operator">.</span><span class="function_name">displayAllTasks</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+
+    <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"Marking 'Buy groceries' as completed:"</span> <span class="operator">&lt;&lt;</span> <span class="reserved_word">endl</span><span class="special_symbol">;</span>
+    <span class="variable">manager</span><span class="operator">.</span><span class="function_name">markTaskCompleted</span><span class="parenthesis">(</span><span class="string">"Buy groceries"</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+
+    <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"All tasks after marking one as completed:"</span> <span class="operator">&lt;&lt;</span> <span class="reserved_word">endl</span><span class="special_symbol">;</span>
+    <span class="variable">manager</span><span class="operator">.</span><span class="function_name">displayAllTasks</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+
+    <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"Removing 'Finish the report':"</span> <span class="operator">&lt;&lt;</span> <span class="reserved_word">endl</span><span class="special_symbol">;</span>
+    <span class="variable">manager</span><span class="operator">.</span><span class="function_name">removeTask</span><span class="parenthesis">(</span><span class="string">"Finish the report"</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+
+    <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"All tasks after removal:"</span> <span class="operator">&lt;&lt;</span> <span class="reserved_word">endl</span><span class="special_symbol">;</span>
+    <span class="variable">manager</span><span class="operator">.</span><span class="function_name">displayAllTasks</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+
+    <span class="reserved_word">return</span> <span class="integer_number">0</span><span class="special_symbol">;</span>
+<span class="curly_braces">}</span>
+</code></pre>
+</body>
+</html>
+
