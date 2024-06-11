@@ -5,6 +5,7 @@
 # This program defines functions for tokenizing a line of text.
 # It uses regular expressions to identify and classify different types of tokens
 # such as reserved words, preprocessing directives, library references, and more.
+# This program includes two ways to make the tokenization process, syncronous and asynchronous.
 
 defmodule Tfile do
   @doc """
@@ -128,29 +129,96 @@ def doHtml(list, out_fd) do
         true ->  "<span class=\"#{class}\">#{escaped_word}</span>"
       end
     end)
+
     # Join all elements into a single string
     |> Enum.join("")
+    # Print the processed HTML content to the output file
+    IO.puts(out_fd, html_content)
+    # Print the closing HTML tags
+    IO.puts(out_fd, """
+    </code></pre>
+    </body>
+    </html>
+    """)
+  end
 
-  # Print the processed HTML content to the output file
-  IO.puts(out_fd, html_content)
+  # Function to procces the tokens in an async way
+  # Using a default value for the number of threads to use
+  def async_lexer(path, num_threads) do
+    {time, _result} = :timer.tc(fn ->
+    # Get the .cpp files in path
+    files = File.ls!(path) |> Enum.filter(&String.ends_with?(&1, ".cpp"))
 
-  # Print the closing HTML tags
-  IO.puts(out_fd, """
-  </code></pre>
-  </body>
-  </html>
-  """)
+    # Calculate the size of each chunk
+    chunk_size = div(length(files), num_threads)
+    # Divide the files into chunks, one for each thread
+    # .chuk_every:
+    # Parameters:
+    # 1. The list to split
+    # 2. The size of the chunks
+    # 3. The step size
+    # 4. The extra value to add into each chunk
+    # # Returns a list with sublists of chunks
+    file_chunks = Enum.chunk_every(files, chunk_size, chunk_size, [])
+
+    # Start a task for each chunk of files
+    tasks = Enum.map(file_chunks, fn file_chunk ->
+      Task.async(fn -> process_files(file_chunk) end)
+    end)
+
+    # Await the results of each task, with a timeout of infinity
+    Enum.map(tasks, &Task.await(&1, :infinity))
+    end)
+
+    IO.puts("Time: #{time / 1_000_000} seconds" )
+  end
+
+  # Function to process a list of files
+  defp process_files(files) do
+    Enum.each(files, fn file_in ->
+      # Generate the output filename
+      file_out = String.replace(file_in, ~r/(\.\w+$)/, "-tokens.html")
+      get_tokens(file_in, file_out)
+    end)
+  end
+
+  # Function to process the tokens in a sync way
+  def sync_lexer(path) do
+    # Start the timer
+    {time, _result} = :timer.tc(fn ->
+    File.ls!(path) |> Enum.filter(&String.ends_with?(&1, ".cpp"))
+    |> Enum.each(fn file_in ->
+      # Generate the output filename
+      file_out = String.replace(file_in, ~r/(\.\w+$)/, "-tokens.html")
+      get_tokens(file_in, file_out)
+      end)
+    end)
+
+    IO.puts("Time: #{time / 1_000_000} seconds" )
+  end
+
+
+
 end
+## REALIZAR VALIDACIONES DE CJHUNK_SIZE Y NUM_THREADS
+# Code to read the command line arguments
+[mode, path | rest] = System.argv()
+
+# Determine the number of threads if provided, default to 4 if not
+num_threads =
+  if length(rest) > 0 do
+    String.to_integer(hd(rest))
+  else
+    System.schedulers
+  end
+
+# Call the appropriate function based on the mode
+case mode do
+  "async" -> Tfile.async_lexer(path, num_threads)
+  "sync" -> Tfile.sync_lexer(path)
+  _ -> IO.puts("Invalid mode. Use 'async' or 'sync'.")
 end
 
-# Code to read a single command line argument
-[in_filename] = System.argv()
-
-# Create the name of the output file
-# Add the string "-.tokens.html" before the extension
-out_filename = String.replace(in_filename, ~r/(\.\w+$)/, "-tokens.html")
-# Call the function to find tokens
-Tfile.get_tokens(in_filename, out_filename)
-
-# Now the program can be called as:
-# elixir ev_final_imc.ex example.cpp
+# Now the program can be called in two ways:
+# elixir lexer.ex async /Users/josezumayamx/Documents/cppFiles 4
+# elixir lexer.ex sync /Users/josezumayamx/Documents/cppFiles
