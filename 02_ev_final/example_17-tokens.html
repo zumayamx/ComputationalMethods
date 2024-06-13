@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Document</title>
+</head>
+<body>
+<pre><code>
+
+<span class="preprocessing">#include</span> <span class="library">&lt;iostream&gt;</span>
+<span class="preprocessing">#include</span> <span class="library">&lt;vector&gt;</span>
+<span class="preprocessing">#include</span> <span class="library">&lt;string&gt;</span>
+<span class="preprocessing">#include</span> <span class="library">&lt;algorithm&gt;</span>
+<span class="preprocessing">#include</span> <span class="library">&lt;map&gt;</span>
+<span class="preprocessing">#include</span> <span class="library">&lt;ctime&gt;</span>
+
+<span class="reserved_word">using</span> <span class="reserved_word">namespace</span> <span class="variable">std</span><span class="special_symbol">;</span>
+
+<span class="operator">/</span><span class="operator">/</span><span class="structure_or_class_instance_declaration">Clase</span> <span class="structure_or_class_instance_declaration">para</span> <span class="structure_or_class_instance_declaration">representar</span> <span class="structure_or_class_instance_declaration">un</span> <span class="variable">libro</span>
+<span class="reserved_word">class</span> <span class="structure_or_class_name">Book</span> <span class="curly_braces">{</span>
+<span class="reserved_word">public</span><span class="operator">:</span>
+    <span class="function_name">Book</span><span class="parenthesis">(</span><span class="structure_or_class_instance_declaration">string</span> <span class="variable">title</span><span class="operator">,</span> <span class="structure_or_class_instance_declaration">string</span> <span class="variable">author</span><span class="operator">,</span> <span class="reserved_word">int</span> <span class="variable">year</span><span class="parenthesis">)</span>
+        <span class="operator">:</span> <span class="function_name">title</span><span class="parenthesis">(</span><span class="variable">title</span><span class="parenthesis">)</span><span class="operator">,</span> <span class="function_name">author</span><span class="parenthesis">(</span><span class="variable">author</span><span class="parenthesis">)</span><span class="operator">,</span> <span class="function_name">year</span><span class="parenthesis">(</span><span class="variable">year</span><span class="parenthesis">)</span><span class="operator">,</span> <span class="function_name">isBorrowed</span><span class="parenthesis">(</span><span class="variable">false</span><span class="parenthesis">)</span> <span class="curly_braces">{</span><span class="curly_braces">}</span>
+
+    <span class="structure_or_class_instance_declaration">string</span> <span class="function_name">getTitle</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="reserved_word">const</span> <span class="curly_braces">{</span> <span class="reserved_word">return</span> <span class="variable">title</span><span class="special_symbol">;</span> <span class="curly_braces">}</span>
+    <span class="structure_or_class_instance_declaration">string</span> <span class="function_name">getAuthor</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="reserved_word">const</span> <span class="curly_braces">{</span> <span class="reserved_word">return</span> <span class="variable">author</span><span class="special_symbol">;</span> <span class="curly_braces">}</span>
+    <span class="reserved_word">int</span> <span class="function_name">getYear</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="reserved_word">const</span> <span class="curly_braces">{</span> <span class="reserved_word">return</span> <span class="variable">year</span><span class="special_symbol">;</span> <span class="curly_braces">}</span>
+    <span class="reserved_word">bool</span> <span class="function_name">getIsBorrowed</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="reserved_word">const</span> <span class="curly_braces">{</span> <span class="reserved_word">return</span> <span class="variable">isBorrowed</span><span class="special_symbol">;</span> <span class="curly_braces">}</span>
+
+    <span class="reserved_word">void</span> <span class="function_name">borrowBook</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="curly_braces">{</span> <span class="variable">isBorrowed</span> <span class="operator">=</span> <span class="variable">true</span><span class="special_symbol">;</span> <span class="curly_braces">}</span>
+    <span class="reserved_word">void</span> <span class="function_name">returnBook</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="curly_braces">{</span> <span class="variable">isBorrowed</span> <span class="operator">=</span> <span class="variable">false</span><span class="special_symbol">;</span> <span class="curly_braces">}</span>
+
+    <span class="reserved_word">void</span> <span class="function_name">displayInfo</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="reserved_word">const</span> <span class="curly_braces">{</span>
+        <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"Title: " &lt;&lt; title &lt;&lt; ", Author: "</span> <span class="operator">&lt;&lt;</span> <span class="variable">author</span>
+             <span class="operator">&lt;&lt;</span> <span class="string">", Year: " &lt;&lt; year &lt;&lt; ", Borrowed: " &lt;&lt; (isBorrowed ? "Yes" : "No"</span><span class="parenthesis">)</span> <span class="operator">&lt;&lt;</span> <span class="reserved_word">endl</span><span class="special_symbol">;</span>
+    <span class="curly_braces">}</span>
+
+<span class="reserved_word">private</span><span class="operator">:</span>
+    <span class="structure_or_class_instance_declaration">string</span> <span class="variable">title</span><span class="special_symbol">;</span>
+    <span class="structure_or_class_instance_declaration">string</span> <span class="variable">author</span><span class="special_symbol">;</span>
+    <span class="reserved_word">int</span> <span class="variable">year</span><span class="special_symbol">;</span>
+    <span class="reserved_word">bool</span> <span class="variable">isBorrowed</span><span class="special_symbol">;</span>
+<span class="curly_braces">}</span><span class="special_symbol">;</span>
+
+<span class="operator">/</span><span class="operator">/</span><span class="structure_or_class_instance_declaration">Clase</span> <span class="structure_or_class_instance_declaration">para</span> <span class="structure_or_class_instance_declaration">representar</span> <span class="structure_or_class_instance_declaration">un</span> <span class="variable">usuario</span>
+<span class="reserved_word">class</span> <span class="structure_or_class_name">User</span> <span class="curly_braces">{</span>
+<span class="reserved_word">public</span><span class="operator">:</span>
+    <span class="function_name">User</span><span class="parenthesis">(</span><span class="structure_or_class_instance_declaration">string</span> <span class="variable">name</span><span class="operator">,</span> <span class="reserved_word">int</span> <span class="variable">id</span><span class="parenthesis">)</span> <span class="operator">:</span> <span class="function_name">name</span><span class="parenthesis">(</span><span class="variable">name</span><span class="parenthesis">)</span><span class="operator">,</span> <span class="function_name">id</span><span class="parenthesis">(</span><span class="variable">id</span><span class="parenthesis">)</span> <span class="curly_braces">{</span><span class="curly_braces">}</span>
+
+    <span class="structure_or_class_instance_declaration">string</span> <span class="function_name">getName</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="reserved_word">const</span> <span class="curly_braces">{</span> <span class="reserved_word">return</span> <span class="variable">name</span><span class="special_symbol">;</span> <span class="curly_braces">}</span>
+    <span class="reserved_word">int</span> <span class="function_name">getId</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="reserved_word">const</span> <span class="curly_braces">{</span> <span class="reserved_word">return</span> <span class="variable">id</span><span class="special_symbol">;</span> <span class="curly_braces">}</span>
+
+    <span class="reserved_word">void</span> <span class="function_name">displayInfo</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="reserved_word">const</span> <span class="curly_braces">{</span>
+        <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"Name: " &lt;&lt; name &lt;&lt; ", ID: "</span> <span class="operator">&lt;&lt;</span> <span class="variable">id</span> <span class="operator">&lt;&lt;</span> <span class="reserved_word">endl</span><span class="special_symbol">;</span>
+    <span class="curly_braces">}</span>
+
+<span class="reserved_word">private</span><span class="operator">:</span>
+    <span class="structure_or_class_instance_declaration">string</span> <span class="variable">name</span><span class="special_symbol">;</span>
+    <span class="reserved_word">int</span> <span class="variable">id</span><span class="special_symbol">;</span>
+<span class="curly_braces">}</span><span class="special_symbol">;</span>
+
+<span class="operator">/</span><span class="operator">/</span><span class="structure_or_class_instance_declaration">Clase</span> <span class="structure_or_class_instance_declaration">para</span> <span class="structure_or_class_instance_declaration">representar</span> <span class="structure_or_class_instance_declaration">un</span> <span class="variable">prestamo</span>
+<span class="reserved_word">class</span> <span class="structure_or_class_name">Borrow</span> <span class="curly_braces">{</span>
+<span class="reserved_word">public</span><span class="operator">:</span>
+    <span class="function_name">Borrow</span><span class="parenthesis">(</span><span class="reserved_word">int</span> <span class="variable">userId</span><span class="operator">,</span> <span class="structure_or_class_instance_declaration">string</span> <span class="variable">bookTitle</span><span class="operator">,</span> <span class="structure_or_class_instance_declaration">time_t</span> <span class="variable">borrowDate</span><span class="parenthesis">)</span>
+        <span class="operator">:</span> <span class="function_name">userId</span><span class="parenthesis">(</span><span class="variable">userId</span><span class="parenthesis">)</span><span class="operator">,</span> <span class="function_name">bookTitle</span><span class="parenthesis">(</span><span class="variable">bookTitle</span><span class="parenthesis">)</span><span class="operator">,</span> <span class="function_name">borrowDate</span><span class="parenthesis">(</span><span class="variable">borrowDate</span><span class="parenthesis">)</span> <span class="curly_braces">{</span><span class="curly_braces">}</span>
+
+    <span class="reserved_word">int</span> <span class="function_name">getUserId</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="reserved_word">const</span> <span class="curly_braces">{</span> <span class="reserved_word">return</span> <span class="variable">userId</span><span class="special_symbol">;</span> <span class="curly_braces">}</span>
+    <span class="structure_or_class_instance_declaration">string</span> <span class="function_name">getBookTitle</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="reserved_word">const</span> <span class="curly_braces">{</span> <span class="reserved_word">return</span> <span class="variable">bookTitle</span><span class="special_symbol">;</span> <span class="curly_braces">}</span>
+    <span class="structure_or_class_instance_declaration">time_t</span> <span class="function_name">getBorrowDate</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="reserved_word">const</span> <span class="curly_braces">{</span> <span class="reserved_word">return</span> <span class="variable">borrowDate</span><span class="special_symbol">;</span> <span class="curly_braces">}</span>
+
+    <span class="reserved_word">void</span> <span class="function_name">displayInfo</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="reserved_word">const</span> <span class="curly_braces">{</span>
+        <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"User ID: " &lt;&lt; userId &lt;&lt; ", Book Title: "</span> <span class="operator">&lt;&lt;</span> <span class="variable">bookTitle</span>
+             <span class="operator">&lt;&lt;</span> <span class="string">", Borrow Date: "</span> <span class="operator">&lt;&lt;</span> <span class="function_name">ctime</span><span class="parenthesis">(</span><span class="operator">&</span><span class="variable">borrowDate</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+    <span class="curly_braces">}</span>
+
+<span class="reserved_word">private</span><span class="operator">:</span>
+    <span class="reserved_word">int</span> <span class="variable">userId</span><span class="special_symbol">;</span>
+    <span class="structure_or_class_instance_declaration">string</span> <span class="variable">bookTitle</span><span class="special_symbol">;</span>
+    <span class="structure_or_class_instance_declaration">time_t</span> <span class="variable">borrowDate</span><span class="special_symbol">;</span>
+<span class="curly_braces">}</span><span class="special_symbol">;</span>
+
+<span class="operator">/</span><span class="operator">/</span><span class="structure_or_class_instance_declaration">Class</span> <span class="structure_or_class_instance_declaration">to</span> <span class="structure_or_class_instance_declaration">represent</span> <span class="structure_or_class_instance_declaration">a</span> <span class="variable">library</span>
+<span class="reserved_word">class</span> <span class="structure_or_class_name">Library</span> <span class="curly_braces">{</span>
+<span class="reserved_word">public</span><span class="operator">:</span>
+    <span class="reserved_word">void</span> <span class="function_name">addBook</span><span class="parenthesis">(</span><span class="reserved_word">const</span> <span class="variable">Book</span><span class="operator">&</span> <span class="variable">book</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+        <span class="variable">books</span><span class="operator">.</span><span class="function_name">push_back</span><span class="parenthesis">(</span><span class="variable">book</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+    <span class="curly_braces">}</span>
+
+    <span class="reserved_word">void</span> <span class="function_name">addUser</span><span class="parenthesis">(</span><span class="reserved_word">const</span> <span class="variable">User</span><span class="operator">&</span> <span class="variable">user</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+        <span class="variable">users</span><span class="operator">.</span><span class="function_name">push_back</span><span class="parenthesis">(</span><span class="variable">user</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+    <span class="curly_braces">}</span>
+
+    <span class="reserved_word">void</span> <span class="function_name">displayAllBooks</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="reserved_word">const</span> <span class="curly_braces">{</span>
+        <span class="reserved_word">for</span> <span class="parenthesis">(</span><span class="reserved_word">const</span> <span class="reserved_word">auto</span><span class="operator">&</span> <span class="variable">book</span> <span class="operator">:</span> <span class="variable">books</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+            <span class="variable">book</span><span class="operator">.</span><span class="function_name">displayInfo</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+        <span class="curly_braces">}</span>
+    <span class="curly_braces">}</span>
+
+    <span class="reserved_word">void</span> <span class="function_name">displayAllUsers</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="reserved_word">const</span> <span class="curly_braces">{</span>
+        <span class="reserved_word">for</span> <span class="parenthesis">(</span><span class="reserved_word">const</span> <span class="reserved_word">auto</span><span class="operator">&</span> <span class="variable">user</span> <span class="operator">:</span> <span class="variable">users</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+            <span class="variable">user</span><span class="operator">.</span><span class="function_name">displayInfo</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+        <span class="curly_braces">}</span>
+    <span class="curly_braces">}</span>
+
+    <span class="reserved_word">void</span> <span class="function_name">borrowBook</span><span class="parenthesis">(</span><span class="reserved_word">int</span> <span class="variable">userId</span><span class="operator">,</span> <span class="reserved_word">const</span> <span class="variable">string</span><span class="operator">&</span> <span class="variable">bookTitle</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+        <span class="reserved_word">auto</span> <span class="variable">userIt</span> <span class="operator">=</span> <span class="function_name">find_if</span><span class="parenthesis">(</span><span class="variable">users</span><span class="operator">.</span><span class="function_name">begin</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="operator">,</span> <span class="variable">users</span><span class="operator">.</span><span class="function_name">end</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="operator">,</span> <span class="operator">[</span><span class="variable">userId</span><span class="operator">]</span><span class="parenthesis">(</span><span class="reserved_word">const</span> <span class="variable">User</span><span class="operator">&</span> <span class="variable">user</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+            <span class="reserved_word">return</span> <span class="variable">user</span><span class="operator">.</span><span class="function_name">getId</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="operator">==</span> <span class="variable">userId</span><span class="special_symbol">;</span>
+        <span class="curly_braces">}</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+
+        <span class="reserved_word">if</span> <span class="parenthesis">(</span><span class="variable">userIt</span> <span class="operator">==</span> <span class="variable">users</span><span class="operator">.</span><span class="function_name">end</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+            <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"User not found!"</span> <span class="operator">&lt;&lt;</span> <span class="reserved_word">endl</span><span class="special_symbol">;</span>
+            <span class="reserved_word">return</span><span class="special_symbol">;</span>
+        <span class="curly_braces">}</span>
+
+        <span class="reserved_word">auto</span> <span class="variable">bookIt</span> <span class="operator">=</span> <span class="function_name">find_if</span><span class="parenthesis">(</span><span class="variable">books</span><span class="operator">.</span><span class="function_name">begin</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="operator">,</span> <span class="variable">books</span><span class="operator">.</span><span class="function_name">end</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="operator">,</span> <span class="operator">[</span><span class="operator">&</span><span class="variable">bookTitle</span><span class="operator">]</span><span class="parenthesis">(</span><span class="reserved_word">const</span> <span class="variable">Book</span><span class="operator">&</span> <span class="variable">book</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+            <span class="reserved_word">return</span> <span class="variable">book</span><span class="operator">.</span><span class="function_name">getTitle</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="operator">==</span> <span class="variable">bookTitle</span><span class="special_symbol">;</span>
+        <span class="curly_braces">}</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+
+        <span class="reserved_word">if</span> <span class="parenthesis">(</span><span class="variable">bookIt</span> <span class="operator">==</span> <span class="variable">books</span><span class="operator">.</span><span class="function_name">end</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+            <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"Book not found!"</span> <span class="operator">&lt;&lt;</span> <span class="reserved_word">endl</span><span class="special_symbol">;</span>
+            <span class="reserved_word">return</span><span class="special_symbol">;</span>
+        <span class="curly_braces">}</span>
+
+        <span class="reserved_word">if</span> <span class="parenthesis">(</span><span class="variable">bookIt</span><span class="operator">-</span><span class="operator">&gt;</span><span class="function_name">getIsBorrowed</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+            <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"Book is already borrowed!"</span> <span class="operator">&lt;&lt;</span> <span class="reserved_word">endl</span><span class="special_symbol">;</span>
+            <span class="reserved_word">return</span><span class="special_symbol">;</span>
+        <span class="curly_braces">}</span>
+
+        <span class="variable">bookIt</span><span class="operator">-</span><span class="operator">&gt;</span><span class="function_name">borrowBook</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+        <span class="structure_or_class_instance_declaration">time_t</span> <span class="variable">now</span> <span class="operator">=</span> <span class="function_name">time</span><span class="parenthesis">(</span><span class="integer_number">0</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+        <span class="variable">borrows</span><span class="operator">.</span><span class="function_name">push_back</span><span class="parenthesis">(</span><span class="function_name">Borrow</span><span class="parenthesis">(</span><span class="variable">userId</span><span class="operator">,</span> <span class="variable">bookTitle</span><span class="operator">,</span> <span class="variable">now</span><span class="parenthesis">)</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+        <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"Book borrowed successfully!"</span> <span class="operator">&lt;&lt;</span> <span class="reserved_word">endl</span><span class="special_symbol">;</span>
+    <span class="curly_braces">}</span>
+
+    <span class="reserved_word">void</span> <span class="function_name">returnBook</span><span class="parenthesis">(</span><span class="reserved_word">int</span> <span class="variable">userId</span><span class="operator">,</span> <span class="reserved_word">const</span> <span class="variable">string</span><span class="operator">&</span> <span class="variable">bookTitle</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+        <span class="reserved_word">auto</span> <span class="variable">borrowIt</span> <span class="operator">=</span> <span class="function_name">find_if</span><span class="parenthesis">(</span><span class="variable">borrows</span><span class="operator">.</span><span class="function_name">begin</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="operator">,</span> <span class="variable">borrows</span><span class="operator">.</span><span class="function_name">end</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="operator">,</span> <span class="operator">[</span><span class="variable">userId</span><span class="operator">,</span> <span class="operator">&</span><span class="variable">bookTitle</span><span class="operator">]</span><span class="parenthesis">(</span><span class="reserved_word">const</span> <span class="variable">Borrow</span><span class="operator">&</span> <span class="variable">borrow</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+            <span class="reserved_word">return</span> <span class="variable">borrow</span><span class="operator">.</span><span class="function_name">getUserId</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="operator">==</span> <span class="variable">userId</span> <span class="operator">&&</span> <span class="variable">borrow</span><span class="operator">.</span><span class="function_name">getBookTitle</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="operator">==</span> <span class="variable">bookTitle</span><span class="special_symbol">;</span>
+        <span class="curly_braces">}</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+
+        <span class="reserved_word">if</span> <span class="parenthesis">(</span><span class="variable">borrowIt</span> <span class="operator">==</span> <span class="variable">borrows</span><span class="operator">.</span><span class="function_name">end</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+            <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"Borrow record not found!"</span> <span class="operator">&lt;&lt;</span> <span class="reserved_word">endl</span><span class="special_symbol">;</span>
+            <span class="reserved_word">return</span><span class="special_symbol">;</span>
+        <span class="curly_braces">}</span>
+
+        <span class="reserved_word">auto</span> <span class="variable">bookIt</span> <span class="operator">=</span> <span class="function_name">find_if</span><span class="parenthesis">(</span><span class="variable">books</span><span class="operator">.</span><span class="function_name">begin</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="operator">,</span> <span class="variable">books</span><span class="operator">.</span><span class="function_name">end</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="operator">,</span> <span class="operator">[</span><span class="operator">&</span><span class="variable">bookTitle</span><span class="operator">]</span><span class="parenthesis">(</span><span class="reserved_word">const</span> <span class="variable">Book</span><span class="operator">&</span> <span class="variable">book</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+            <span class="reserved_word">return</span> <span class="variable">book</span><span class="operator">.</span><span class="function_name">getTitle</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="operator">==</span> <span class="variable">bookTitle</span><span class="special_symbol">;</span>
+        <span class="curly_braces">}</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+
+        <span class="reserved_word">if</span> <span class="parenthesis">(</span><span class="variable">bookIt</span> <span class="operator">!=</span> <span class="variable">books</span><span class="operator">.</span><span class="function_name">end</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+            <span class="variable">bookIt</span><span class="operator">-</span><span class="operator">&gt;</span><span class="function_name">returnBook</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+        <span class="curly_braces">}</span>
+
+        <span class="variable">borrows</span><span class="operator">.</span><span class="function_name">erase</span><span class="parenthesis">(</span><span class="variable">borrowIt</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+        <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"Book returned successfully!"</span> <span class="operator">&lt;&lt;</span> <span class="reserved_word">endl</span><span class="special_symbol">;</span>
+    <span class="curly_braces">}</span>
+
+    <span class="reserved_word">void</span> <span class="function_name">displayAllBorrows</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="reserved_word">const</span> <span class="curly_braces">{</span>
+        <span class="reserved_word">for</span> <span class="parenthesis">(</span><span class="reserved_word">const</span> <span class="reserved_word">auto</span><span class="operator">&</span> <span class="variable">borrow</span> <span class="operator">:</span> <span class="variable">borrows</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+            <span class="variable">borrow</span><span class="operator">.</span><span class="function_name">displayInfo</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+        <span class="curly_braces">}</span>
+    <span class="curly_braces">}</span>
+
+<span class="reserved_word">private</span><span class="operator">:</span>
+    <span class="variable">vector</span><span class="library">&lt;Book&gt;</span> <span class="variable">books</span><span class="special_symbol">;</span>
+    <span class="variable">vector</span><span class="library">&lt;User&gt;</span> <span class="variable">users</span><span class="special_symbol">;</span>
+    <span class="variable">vector</span><span class="library">&lt;Borrow&gt;</span> <span class="variable">borrows</span><span class="special_symbol">;</span>
+<span class="curly_braces">}</span><span class="special_symbol">;</span>
+
+<span class="operator">/</span><span class="operator">/</span><span class="structure_or_class_instance_declaration">Menu</span> <span class="variable">functions</span>
+<span class="reserved_word">void</span> <span class="function_name">displayMenu</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+    <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"Library Management System"</span> <span class="operator">&lt;&lt;</span> <span class="reserved_word">endl</span><span class="special_symbol">;</span>
+    <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"1. Add Book"</span> <span class="operator">&lt;&lt;</span> <span class="reserved_word">endl</span><span class="special_symbol">;</span>
+    <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"2. Add User"</span> <span class="operator">&lt;&lt;</span> <span class="reserved_word">endl</span><span class="special_symbol">;</span>
+    <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"3. Display All Books"</span> <span class="operator">&lt;&lt;</span> <span class="reserved_word">endl</span><span class="special_symbol">;</span>
+    <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"4. Display All Users"</span> <span class="operator">&lt;&lt;</span> <span class="reserved_word">endl</span><span class="special_symbol">;</span>
+    <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"5. Borrow Book"</span> <span class="operator">&lt;&lt;</span> <span class="reserved_word">endl</span><span class="special_symbol">;</span>
+    <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"6. Return Book"</span> <span class="operator">&lt;&lt;</span> <span class="reserved_word">endl</span><span class="special_symbol">;</span>
+    <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"7. Display All Borrows"</span> <span class="operator">&lt;&lt;</span> <span class="reserved_word">endl</span><span class="special_symbol">;</span>
+    <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"8. Exit"</span> <span class="operator">&lt;&lt;</span> <span class="reserved_word">endl</span><span class="special_symbol">;</span>
+<span class="curly_braces">}</span>
+
+<span class="reserved_word">void</span> <span class="function_name">addBook</span><span class="parenthesis">(</span><span class="variable">Library</span><span class="operator">&</span> <span class="variable">library</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+    <span class="structure_or_class_instance_declaration">string</span> <span class="variable">title</span><span class="operator">,</span> <span class="variable">author</span><span class="special_symbol">;</span>
+    <span class="reserved_word">int</span> <span class="variable">year</span><span class="special_symbol">;</span>
+    <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"Enter book title: "</span><span class="special_symbol">;</span>
+    <span class="variable">cin</span><span class="operator">.</span><span class="function_name">ignore</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+    <span class="function_name">getline</span><span class="parenthesis">(</span><span class="variable">cin</span><span class="operator">,</span> <span class="variable">title</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+    <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"Enter book author: "</span><span class="special_symbol">;</span>
+    <span class="function_name">getline</span><span class="parenthesis">(</span><span class="variable">cin</span><span class="operator">,</span> <span class="variable">author</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+    <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"Enter publication year: "</span><span class="special_symbol">;</span>
+    <span class="variable">cin</span> <span class="operator">&gt;&gt;</span> <span class="variable">year</span><span class="special_symbol">;</span>
+    <span class="variable">library</span><span class="operator">.</span><span class="function_name">addBook</span><span class="parenthesis">(</span><span class="function_name">Book</span><span class="parenthesis">(</span><span class="variable">title</span><span class="operator">,</span> <span class="variable">author</span><span class="operator">,</span> <span class="variable">year</span><span class="parenthesis">)</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+<span class="curly_braces">}</span>
+
+<span class="reserved_word">void</span> <span class="function_name">addUser</span><span class="parenthesis">(</span><span class="variable">Library</span><span class="operator">&</span> <span class="variable">library</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+    <span class="structure_or_class_instance_declaration">string</span> <span class="variable">name</span><span class="special_symbol">;</span>
+    <span class="reserved_word">int</span> <span class="variable">id</span><span class="special_symbol">;</span>
+    <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"Enter user name: "</span><span class="special_symbol">;</span>
+    <span class="variable">cin</span><span class="operator">.</span><span class="function_name">ignore</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+    <span class="function_name">getline</span><span class="parenthesis">(</span><span class="variable">cin</span><span class="operator">,</span> <span class="variable">name</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+    <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"Enter user ID: "</span><span class="special_symbol">;</span>
+    <span class="variable">cin</span> <span class="operator">&gt;&gt;</span> <span class="variable">id</span><span class="special_symbol">;</span>
+    <span class="variable">library</span><span class="operator">.</span><span class="function_name">addUser</span><span class="parenthesis">(</span><span class="function_name">User</span><span class="parenthesis">(</span><span class="variable">name</span><span class="operator">,</span> <span class="variable">id</span><span class="parenthesis">)</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+<span class="curly_braces">}</span>
+
+<span class="reserved_word">void</span> <span class="function_name">borrowBook</span><span class="parenthesis">(</span><span class="variable">Library</span><span class="operator">&</span> <span class="variable">library</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+    <span class="reserved_word">int</span> <span class="variable">userId</span><span class="special_symbol">;</span>
+    <span class="structure_or_class_instance_declaration">string</span> <span class="variable">bookTitle</span><span class="special_symbol">;</span>
+    <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"Enter user ID: "</span><span class="special_symbol">;</span>
+    <span class="variable">cin</span> <span class="operator">&gt;&gt;</span> <span class="variable">userId</span><span class="special_symbol">;</span>
+    <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"Enter book title: "</span><span class="special_symbol">;</span>
+    <span class="variable">cin</span><span class="operator">.</span><span class="function_name">ignore</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+    <span class="function_name">getline</span><span class="parenthesis">(</span><span class="variable">cin</span><span class="operator">,</span> <span class="variable">bookTitle</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+    <span class="variable">library</span><span class="operator">.</span><span class="function_name">borrowBook</span><span class="parenthesis">(</span><span class="variable">userId</span><span class="operator">,</span> <span class="variable">bookTitle</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+<span class="curly_braces">}</span>
+
+<span class="reserved_word">void</span> <span class="function_name">returnBook</span><span class="parenthesis">(</span><span class="variable">Library</span><span class="operator">&</span> <span class="variable">library</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+    <span class="reserved_word">int</span> <span class="variable">userId</span><span class="special_symbol">;</span>
+    <span class="structure_or_class_instance_declaration">string</span> <span class="variable">bookTitle</span><span class="special_symbol">;</span>
+    <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"Enter user ID: "</span><span class="special_symbol">;</span>
+    <span class="variable">cin</span> <span class="operator">&gt;&gt;</span> <span class="variable">userId</span><span class="special_symbol">;</span>
+    <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"Enter book title: "</span><span class="special_symbol">;</span>
+    <span class="variable">cin</span><span class="operator">.</span><span class="function_name">ignore</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+    <span class="function_name">getline</span><span class="parenthesis">(</span><span class="variable">cin</span><span class="operator">,</span> <span class="variable">bookTitle</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+    <span class="variable">library</span><span class="operator">.</span><span class="function_name">returnBook</span><span class="parenthesis">(</span><span class="variable">userId</span><span class="operator">,</span> <span class="variable">bookTitle</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+<span class="curly_braces">}</span>
+
+<span class="reserved_word">int</span> <span class="function_name">main</span><span class="parenthesis">(</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+    <span class="structure_or_class_instance_declaration">Library</span> <span class="variable">library</span><span class="special_symbol">;</span>
+    <span class="reserved_word">int</span> <span class="variable">choice</span><span class="special_symbol">;</span>
+
+    <span class="reserved_word">do</span> <span class="curly_braces">{</span>
+        <span class="function_name">displayMenu</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+        <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"Enter your choice: "</span><span class="special_symbol">;</span>
+        <span class="variable">cin</span> <span class="operator">&gt;&gt;</span> <span class="variable">choice</span><span class="special_symbol">;</span>
+
+        <span class="reserved_word">switch</span> <span class="parenthesis">(</span><span class="variable">choice</span><span class="parenthesis">)</span> <span class="curly_braces">{</span>
+            <span class="reserved_word">case</span> <span class="integer_number">1</span><span class="operator">:</span>
+                <span class="function_name">addBook</span><span class="parenthesis">(</span><span class="variable">library</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+                <span class="reserved_word">break</span><span class="special_symbol">;</span>
+            <span class="reserved_word">case</span> <span class="integer_number">2</span><span class="operator">:</span>
+                <span class="function_name">addUser</span><span class="parenthesis">(</span><span class="variable">library</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+                <span class="reserved_word">break</span><span class="special_symbol">;</span>
+            <span class="reserved_word">case</span> <span class="integer_number">3</span><span class="operator">:</span>
+                <span class="variable">library</span><span class="operator">.</span><span class="function_name">displayAllBooks</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+                <span class="reserved_word">break</span><span class="special_symbol">;</span>
+            <span class="reserved_word">case</span> <span class="integer_number">4</span><span class="operator">:</span>
+                <span class="variable">library</span><span class="operator">.</span><span class="function_name">displayAllUsers</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+                <span class="reserved_word">break</span><span class="special_symbol">;</span>
+            <span class="reserved_word">case</span> <span class="integer_number">5</span><span class="operator">:</span>
+                <span class="function_name">borrowBook</span><span class="parenthesis">(</span><span class="variable">library</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+                <span class="reserved_word">break</span><span class="special_symbol">;</span>
+            <span class="reserved_word">case</span> <span class="integer_number">6</span><span class="operator">:</span>
+                <span class="function_name">returnBook</span><span class="parenthesis">(</span><span class="variable">library</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+                <span class="reserved_word">break</span><span class="special_symbol">;</span>
+            <span class="reserved_word">case</span> <span class="integer_number">7</span><span class="operator">:</span>
+                <span class="variable">library</span><span class="operator">.</span><span class="function_name">displayAllBorrows</span><span class="parenthesis">(</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+                <span class="reserved_word">break</span><span class="special_symbol">;</span>
+            <span class="reserved_word">case</span> <span class="integer_number">8</span><span class="operator">:</span>
+                <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"Exiting..."</span> <span class="operator">&lt;&lt;</span> <span class="reserved_word">endl</span><span class="special_symbol">;</span>
+                <span class="reserved_word">break</span><span class="special_symbol">;</span>
+            <span class="reserved_word">default</span><span class="operator">:</span>
+                <span class="reserved_word">cout</span> <span class="operator">&lt;&lt;</span> <span class="string">"Invalid choice! Please try again."</span> <span class="operator">&lt;&lt;</span> <span class="reserved_word">endl</span><span class="special_symbol">;</span>
+                <span class="reserved_word">break</span><span class="special_symbol">;</span>
+        <span class="curly_braces">}</span>
+    <span class="curly_braces">}</span> <span class="reserved_word">while</span> <span class="parenthesis">(</span><span class="variable">choice</span> <span class="operator">!=</span> <span class="integer_number">8</span><span class="parenthesis">)</span><span class="special_symbol">;</span>
+
+    <span class="reserved_word">return</span> <span class="integer_number">0</span><span class="special_symbol">;</span>
+<span class="curly_braces">}</span>
+</code></pre>
+</body>
+</html>
+
