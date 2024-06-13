@@ -78,8 +78,8 @@ defp find_token(line, res) do
         case Regex.run(pattern, line, capture: :first) do
           # If a match is found, extract the matched token and the remaining line
           [match] ->
-            IO.inspect(match, label: "Match")
-            IO.inspect(type, label: "Type")
+            #IO.inspect(match, label: "Match")
+            #IO.inspect(type, label: "Type")
             remaining = String.slice(line, String.length(match)..String.length(line))
             #IO.inspect()
             {type, match, remaining}
@@ -200,7 +200,7 @@ def doHtml(list, out_fd) do
 
 
 end
-## REALIZAR VALIDACIONES DE CJHUNK_SIZE Y NUM_THREADS
+
 # Code to read the command line arguments
 [mode, path | rest] = System.argv()
 
